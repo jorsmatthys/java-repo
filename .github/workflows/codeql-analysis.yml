@@ -59,7 +59,8 @@ jobs:
           languages: ${{ matrix.language }}
           queries: +security-and-quality
 
-      - run: |
+      - name: check environment
+	run: |
 	  ls -l
 	  pwd
           which mvn
