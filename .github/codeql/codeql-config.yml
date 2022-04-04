@@ -1,0 +1,7 @@
+name: "Security and Quality CodeQL"
+
+queries:
+  - uses: security-and-quality
+
+paths-ignore:
+  - src/test
