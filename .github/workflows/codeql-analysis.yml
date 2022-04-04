@@ -60,11 +60,11 @@ jobs:
           queries: +security-and-quality
 
       - name: check environment
-	run: |
-	  ls -l
-	  pwd
+        run: |
+          ls -l
+          pwd
           which mvn
-	  mvn --version
+          mvn --version
 
       # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
       # If this step fails, then you should remove it and run the build manually (see below)
