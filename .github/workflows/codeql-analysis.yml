@@ -1,6 +1,7 @@
 name: "CodeQL"
 
 on:
+  workflow_dispatch:
   pull_request:
     types: [ opened, reopened ]
 
@@ -38,15 +39,25 @@ jobs:
           cache: "maven"
           overwrite-settings: false
 
-      - name: Initialize CodeQL
+      - name: Initialize CodeQL with custom config
         uses: github/codeql-action/init@v1
+        id: codeql_init_custom
+        if: hashFiles('.github/codeql/codeql-config.yml') != ''
         with:
           languages: ${{ matrix.language }}
+          queries: +security-and-quality
           config-file: .github/codeql/codeql-config.yml
           # If you wish to specify custom queries, you can do so here or in a config file.
           # By default, queries listed here will override any specified in a config file.
           # Prefix the list here with "+" to use these queries and those in the config file.
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
+
+      - name: Initialize CodeQL with default config
+        uses: github/codeql-action/init@v1
+        if: ${{ steps.codeql_init_custom.conclusion == 'skipped' }}
+        with:
+          languages: ${{ matrix.language }}
+          queries: +security-and-quality
 
 
       # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
