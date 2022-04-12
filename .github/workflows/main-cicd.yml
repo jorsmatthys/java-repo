@@ -1,0 +1,14 @@
+name: Main CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    uses: liantisit-common/reusable-workflows/.github/workflows/mvnw-job-junit-report.yml@0.14.0
+    with:
+      java_main_version: 8
+      mvnw_base_command: sonar:sonar
