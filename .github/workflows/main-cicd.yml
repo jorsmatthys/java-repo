@@ -7,11 +7,25 @@ on:
       - main
 
 jobs:
-  ci:
-    uses: liantisit-common/reusable-workflows/.github/workflows/mvnw-job-junit-report.yml@0.14.0
-    with:
-      java_main_version: 8
-      mvnw_base_command: sonar:sonar
+  mvnw:
+    runs-on: [ self-hosted, Linux, hub, ephemeral, mvnw ]
     env:
+      MAVEN_OPTS: -Xmx2048M -XX:MaxMetaspaceSize=512M
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: ${{ inputs.java_main_version }}
+          distribution: "adopt"
+          cache: "maven"
+          overwrite-settings: false
+      - run: ./mvnw sonar:sonar --batch-mode --errors --fail-at-end --show-version
+    #        todo fork junit report repo for security reasons
+    #      - name: Publish Test Report
+    #        uses: mikepenz/action-junit-report@v2
+    #        if: always()
+    #        with:
+    #          report_paths: '**/surefire-reports/TEST-*.xml'
+
