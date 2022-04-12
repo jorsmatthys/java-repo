@@ -12,3 +12,6 @@ jobs:
     with:
       java_main_version: 8
       mvnw_base_command: sonar:sonar
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
