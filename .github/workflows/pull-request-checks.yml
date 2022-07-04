@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: [ self-hosted, Linux, hub, ephemeral, mvnw ]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -37,6 +37,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-          ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          ./mvnw install
+          ./mvnw -B sonar:sonar \
           -Dsonar.projectKey=liantisit-github-automation-poc_java-repo_AYHImyvpLtwCGEiKdX44 \
           -Dsonar.login=${SONAR_TOKEN} -Dsonar.host.url=${SONAR_HOST_URL}

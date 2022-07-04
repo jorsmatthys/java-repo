@@ -13,3 +13,4 @@ It is based on Vincent Driessen's excellent command line tool [gitflow](https://
 ## Read The Docs
 For more information and docs, see our new site: [http://jgitflow.bitbucket.org/](http://jgitflow.bitbucket.org/)
 
+## Read The Docs some more
