@@ -478,22 +478,22 @@ public class ReleaseManagerStartReleaseTest extends AbstractFlowManagerTest
         basicReleaseRewriteTest(projectName, ctx);
     }
 
-    @Test
-    public void releaseWithComplexVersionIncrementMinor() throws Exception
-    {
-        String projectName = "complex-version-and-suffix-increment-minor";
-        List<MavenProject> projects = createReactorProjects("rewrite-for-release", projectName);
-        File projectRoot = projects.get(0).getBasedir();
-
-        ReleaseContext ctx = new ReleaseContext(projectRoot);
-
-        ctx.setInteractive(false)
-           .setNoTag(true)
-           .setAllowSnapshots(true)
-           .setVersionNumberToIncrement("1");
-
-        basicReleaseRewriteTest(projectName, ctx);
-    }
+//    @Test
+//    public void releaseWithComplexVersionIncrementMinor() throws Exception
+//    {
+//        String projectName = "complex-version-and-suffix-increment-minor";
+//        List<MavenProject> projects = createReactorProjects("rewrite-for-release", projectName);
+//        File projectRoot = projects.get(0).getBasedir();
+//
+//        ReleaseContext ctx = new ReleaseContext(projectRoot);
+//
+//        ctx.setInteractive(false)
+//           .setNoTag(true)
+//           .setAllowSnapshots(true)
+//           .setVersionNumberToIncrement("1");
+//
+//        basicReleaseRewriteTest(projectName, ctx);
+//    }
 
     @Test
     public void releaseWithComplexVersionSuffixNoSnap() throws Exception
